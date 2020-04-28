@@ -19,7 +19,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-import controller.errorcheck;
+
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -632,7 +632,7 @@ public class BloodPack extends javax.swing.JFrame implements DBOperations, Displ
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             String name = txtdonor.getText();
-            txtBlood.setText(getBloodType(get_DID(name)));
+            //txtBlood.setText(getBloodType(get_DID(name)));
         }
     }//GEN-LAST:event_txtdonorKeyPressed
 

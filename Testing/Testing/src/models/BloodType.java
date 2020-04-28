@@ -7,7 +7,7 @@ package models;
 
 
 import com.mysql.jdbc.Statement;
-import controller.errorcheck;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -34,7 +34,7 @@ public class BloodType extends javax.swing.JFrame implements DBOperations, Displ
      */
     public BloodType() {
         initComponents();
-        table_update();
+       // table_update();
     }
 
     
@@ -49,7 +49,7 @@ public class BloodType extends javax.swing.JFrame implements DBOperations, Displ
         this.isAdmin = isAdmin;  
         this.pass = pass;
         getId();
-        table_update();
+       // table_update();
     }
     
     PreparedStatement ptsmnt;

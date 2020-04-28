@@ -31,10 +31,7 @@ public class EditHistory extends javax.swing.JFrame implements Display,DBOperati
      */
     public EditHistory() {
         initComponents();
-        packTypeTable_update();
-        bloodTypeTable_update();
-        bloodPackTable_update();
-        accountsTable_update();
+      
         
     }
     
@@ -48,10 +45,7 @@ public class EditHistory extends javax.swing.JFrame implements Display,DBOperati
         this.lname = name;
         this.isAdmin = isAdmin;
         this.pass = pass;
-        packTypeTable_update();
-        bloodTypeTable_update();
-        bloodPackTable_update();
-        accountsTable_update();
+      
     }
 
     DefaultTableModel model = new DefaultTableModel();
@@ -453,161 +447,9 @@ public class EditHistory extends javax.swing.JFrame implements Display,DBOperati
     }// </editor-fold>//GEN-END:initComponents
 
     
-     private void packTypeTable_update(){
-        try {
-            int c;
-            try {
-                Connection conl = createConnection();
-                pst = conl.prepareStatement(PACKTYPE_ACTION);
-                rs = pst.executeQuery();
-                
-                ResultSetMetaData rsd = rs.getMetaData();
-                c = rsd.getColumnCount();
-                
-                DefaultTableModel d = (DefaultTableModel)packTypeTable.getModel();
-                d.setRowCount(0);
-                
-                
-                while(rs.next()){
-                    Vector v2 = new Vector();
-                    
-                    for(int i=1; i<=c; i++){
-                       v2.add(rs.getString("packType_id"));
-                       v2.add(rs.getString("action"));
-                       v2.add(rs.getString("account_id"));
-                       v2.add(rs.getString("date"));
-                       
-                    }
-                    
-                    d.addRow(v2);
-                }
-                
-                
-            } catch (ClassNotFoundException ex) {
-               JOptionPane.showMessageDialog(this,SYS_ERROR);
-            }
-             
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this,SYS_ERROR);
-        }
-    }
-    
-    private void bloodTypeTable_update(){
-        try {
-            int c;
-            try {
-                Connection conl = createConnection();
-                pst = conl.prepareStatement(BLOODTYPE_ACTION);
-                rs = pst.executeQuery();
-                
-                ResultSetMetaData rsd = rs.getMetaData();
-                c = rsd.getColumnCount();
-                
-                DefaultTableModel d = (DefaultTableModel)bloodTypeTable.getModel();
-                d.setRowCount(0);
-                
-                
-                while(rs.next()){
-                    Vector v2 = new Vector();
-                    
-                    for(int i=1; i<=c; i++){
-                       v2.add(rs.getString("donor_id"));
-                       v2.add(rs.getString("action"));
-                       v2.add(rs.getString("account_id"));
-                       v2.add(rs.getString("date"));
-                       
-                    }
-                    
-                    d.addRow(v2);
-                }
-                
-                
-            } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(this,SYS_ERROR);
-            }
-             
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this,SYS_ERROR);
-        }
-    } 
-
-    private void bloodPackTable_update(){
-        try {
-            int c;
-            try {
-                Connection conl = createConnection();
-                pst = conl.prepareStatement(BLOODPACK_ACTION);
-                rs = pst.executeQuery();
-                
-                ResultSetMetaData rsd = rs.getMetaData();
-                c = rsd.getColumnCount();
-                
-                DefaultTableModel d = (DefaultTableModel)bloodPackTable.getModel();
-                d.setRowCount(0);
-                
-                
-                while(rs.next()){
-                    Vector v2 = new Vector();
-                    
-                    for(int i=1; i<=c; i++){
-                       v2.add(rs.getString("bloodPack_id"));
-                       v2.add(rs.getString("action"));
-                       v2.add(rs.getString("account_id"));
-                       v2.add(rs.getString("date"));
-                       
-                    }
-                    
-                    d.addRow(v2);
-                }
-                
-                
-            } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(this,SYS_ERROR);
-            }
-             
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this,SYS_ERROR);
-        }
-    }
-    
-    private void accountsTable_update(){
-        try {
-            int c;
-            try {
-                Connection conl = createConnection();
-                pst = conl.prepareStatement(ACCOUNTS_ACTION);
-                rs = pst.executeQuery();
-                
-                ResultSetMetaData rsd = rs.getMetaData();
-                c = rsd.getColumnCount();
-                
-                DefaultTableModel d = (DefaultTableModel)accountTable.getModel();
-                d.setRowCount(0);
-                
-                
-                while(rs.next()){
-                    Vector v2 = new Vector();
-                    
-                    for(int i=1; i<=c; i++){
-                       v2.add(rs.getString("account_id"));
-                       v2.add(rs.getString("action"));
-                       v2.add(rs.getString("admin_id"));
-                       v2.add(rs.getString("date"));
-                       
-                    }
-                    
-                    d.addRow(v2);
-                }
-                
-                
-            } catch (ClassNotFoundException ex) {
-               JOptionPane.showMessageDialog(this,SYS_ERROR);
-            }
-             
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this,SYS_ERROR);
-        }
-    }
+   
+   
+   
     
     private void bloodTypeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bloodTypeTableMouseClicked
         // TODO add your handling code here:

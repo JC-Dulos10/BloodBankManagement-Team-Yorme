@@ -6,7 +6,7 @@
 package models;
 
 
-import controller.errorcheck;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -31,7 +31,7 @@ public class PackType extends javax.swing.JFrame implements DBOperations, Displa
      */
     public PackType() {
         initComponents();
-        table_update();
+       // table_update();
     }
     
     String lname;
@@ -45,7 +45,7 @@ public class PackType extends javax.swing.JFrame implements DBOperations, Displa
         this.isAdmin = isAdmin; 
         this.pass = pass;
         getId();
-        table_update();
+      //  table_update();
     }
     
     PreparedStatement ptsmnt;
@@ -69,25 +69,7 @@ public class PackType extends javax.swing.JFrame implements DBOperations, Displa
         
     }
     
-    public void edithistory(String action, int id){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_TIME);
-        LocalDateTime now = LocalDateTime.now();
-        String date = dtf.format(now);
-        try {
-            Connection conl = createConnection();
-            ptsmnt = conl.prepareStatement(INSERT_HISTORY_PACKTYPE);
-            ptsmnt.setInt(1, id);
-            ptsmnt.setString(2, action);
-            ptsmnt.setString(3, date);
-            ptsmnt.setInt(4, userID);
-            ptsmnt.executeUpdate();      
-            } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(this,SYS_ERROR);
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this,SYS_ERROR);
-            }
-    }
-    
+ 
     
     
     
@@ -393,43 +375,7 @@ public class PackType extends javax.swing.JFrame implements DBOperations, Displa
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void table_update(){
-        try {
-            int c;
-            try {
-                Connection conl = createConnection();
-                ptsmnt = conl.prepareStatement(UPDATE_TABLE_PACKTYPE);
-                ResultSet rs = ptsmnt.executeQuery();
-                
-                ResultSetMetaData rsd = rs.getMetaData();
-                c = rsd.getColumnCount();
-                
-                DefaultTableModel d = (DefaultTableModel)jTable1.getModel();
-                d.setRowCount(0);
-                
-                
-                while(rs.next()){
-                    Vector v2 = new Vector();
-                    
-                    for(int i=1; i<=c; i++){
-                       v2.add(rs.getString("id"));
-                       v2.add(rs.getString("packType"));
-                       v2.add(rs.getString("shelfLife"));
-                       v2.add(rs.getString("status"));
-                    }
-                    
-                    d.addRow(v2);
-                }
-                
-                
-            } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(this,SYS_ERROR);
-            }
-             
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this,SYS_ERROR);
-        }
-    }
+   
     
     
     
@@ -437,136 +383,13 @@ public class PackType extends javax.swing.JFrame implements DBOperations, Displa
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-         errorcheck err = new errorcheck();// Calls the error and restriction methods 
-        
-        
-        String packType = txtpack.getText();
-        String shelfLife = txtLife.getText();
-        String status = txtstatus.getSelectedItem().toString();
-        int generatedID = 0;
-        if(isAdmin.equals("Yes")){
-            try {
-            Connection conl = createConnection();
-            ptsmnt = conl.prepareStatement(INSERT_PACKTYPE,Statement.RETURN_GENERATED_KEYS);
-            ptsmnt.setString(1, packType);
-            
-            //If input String value is empty
-            if(err.isEmpty(packType) == true){
-                JOptionPane.showMessageDialog(this, NOT_EMPTY);
-                txtpack.requestFocus();
-            }
-            //If input contains illegal characters that are not good for databases
-            else if(err.isContainIllegalChar(packType) == true){
-                JOptionPane.showMessageDialog(this, NO_ILLEGAL_CHAR);
-                txtpack.requestFocus();
-            }
-            
-            else{
-              if(err.isEmpty(shelfLife)){
-                  JOptionPane.showMessageDialog(this, NOT_EMPTY);
-                  txtLife.requestFocus();
-              }  else if(err.numberOrNot(shelfLife) == false){
-                  JOptionPane.showMessageDialog(this, LIFE_NUM);
-                  txtLife.requestFocus();
-              } else if(err.isContainIllegalChar(packType) == true){
-                JOptionPane.showMessageDialog(this, NO_ILLEGAL_CHAR);
-                txtLife.requestFocus();
-            } else {
-                  ptsmnt.setString(2, shelfLife);
-                  ptsmnt.setString(3, status);
-                  ptsmnt.executeUpdate();
-
-                  ResultSet generatedKeyResult = ptsmnt.getGeneratedKeys();
-                  if(generatedKeyResult.next()){
-                      generatedID = generatedKeyResult.getInt(1);
-                  }
-                  JOptionPane.showMessageDialog(this, PT_ADD);
-                  table_update();
-                  txtpack.setText("");
-                  txtpack.requestFocus();
-                  edithistory(PT_ID_ADD , generatedID); 
-                }
-            }
-          } catch (ClassNotFoundException ex) {
-              JOptionPane.showMessageDialog(this,SYS_ERROR);
-          } catch (SQLException ex) {
-              JOptionPane.showMessageDialog(this,SYS_ERROR);
-          }
-        } else{
-            JOptionPane.showMessageDialog(this, ADMIN_ONLY);
-            int dialogResult = JOptionPane.showConfirmDialog(this, LOGIN_AS_ADMIN, "Warning",JOptionPane.YES_NO_OPTION);
-            if(dialogResult == JOptionPane.YES_OPTION){
-                login l = new  login();
-                this.hide();
-                l.setVisible(true);
-            }
-        }
-        
+       
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        DefaultTableModel d1 = (DefaultTableModel)jTable1.getModel();
-        int selectIndex = jTable1. getSelectedRow();
-        
-        int id = Integer.parseInt(d1.getValueAt(selectIndex, 0).toString());
-        String packType = txtpack.getText();
-        String status = txtstatus.getSelectedItem().toString();
-        String shelfLife = txtLife.getText();
-        errorcheck err = new errorcheck();// Calls the error and restriction methods 
-        
-        if(isAdmin.equals("Yes")){
-            try {
-            Connection conl = createConnection();
-            ptsmnt = conl.prepareStatement(UPDATE_PACKTYPE);
-            ptsmnt.setString(1, packType);
-            
-            //If input String value is empty
-            if(err.isEmpty(packType) == true){
-                JOptionPane.showMessageDialog(this, NOT_EMPTY);
-                txtpack.requestFocus();
-            }
-            //If input contains illegal characters that are not good for databases
-            else if(err.isContainIllegalChar(packType) == true){
-                JOptionPane.showMessageDialog(this, NO_ILLEGAL_CHAR);
-                txtpack.requestFocus();
-            }
-            if(err.isEmpty(shelfLife)){
-                  JOptionPane.showMessageDialog(this, NOT_EMPTY);
-                  txtLife.requestFocus();
-              }  else if(err.numberOrNot(shelfLife) == false){
-                  JOptionPane.showMessageDialog(this, LIFE_NUM);
-                  txtLife.requestFocus();
-              } else if(err.isContainIllegalChar(packType) == true){
-                JOptionPane.showMessageDialog(this, NO_ILLEGAL_CHAR);
-                txtLife.requestFocus();
-            } else{
-                ptsmnt.setString(2, shelfLife);
-                ptsmnt.setString(3, status);
-                ptsmnt.setInt(4, id);
-                ptsmnt.executeUpdate();
-                JOptionPane.showMessageDialog(this, PT_UPDATED);
-                table_update();
-                txtpack.setText("");
-                txtpack.requestFocus();
-                edithistory(PT_ID_UPDATED , id); 
-                jButton1.setEnabled(true);
-            }
-           
-            } catch (ClassNotFoundException | SQLException ex) {
-                JOptionPane.showMessageDialog(this,SYS_ERROR);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, ADMIN_ONLY);
-            int dialogResult = JOptionPane.showConfirmDialog(this,LOGIN_AS_ADMIN, "Warning",JOptionPane.YES_NO_OPTION);
-            if(dialogResult == JOptionPane.YES_OPTION){
-                login l = new  login();
-                this.hide();
-                l.setVisible(true);
-            }
-        }
-        
+       
         
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -574,14 +397,7 @@ public class PackType extends javax.swing.JFrame implements DBOperations, Displa
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         
-         DefaultTableModel d1 = (DefaultTableModel)jTable1.getModel();
-         int selectIndex = jTable1.getSelectedRow();
-        
-         jButton1.setEnabled(false);
-         txtpack.setText(d1.getValueAt(selectIndex, 1).toString());
-         txtLife.setText(d1.getValueAt(selectIndex, 2).toString());
-         txtstatus.setSelectedItem(d1.getValueAt(selectIndex, 3).toString());
-         
+       
          
          
          
@@ -590,42 +406,7 @@ public class PackType extends javax.swing.JFrame implements DBOperations, Displa
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         
-        DefaultTableModel d1 = (DefaultTableModel)jTable1.getModel();
-        int selectIndex = jTable1. getSelectedRow();
-        
-        int id = Integer.parseInt(d1.getValueAt(selectIndex, 0).toString());
-        
-        if(isAdmin.equals("Yes")){
-            int dialogResult = JOptionPane.showConfirmDialog(this, RECORD_DELETED, "Warning",JOptionPane.YES_NO_OPTION);
-        
-            if(dialogResult == JOptionPane.YES_OPTION){
-            
-                try {
-                Connection conl = createConnection();
-                ptsmnt = conl.prepareStatement(DELETE_PACKTYPE);
-                ptsmnt.setInt(1, id);
-                ptsmnt.executeUpdate();
-                JOptionPane.showMessageDialog(this, PT_DELETE);
-                table_update();
-                txtpack.setText("");
-                txtpack.requestFocus();
-                edithistory(PT_ID_DELETE , id);
-                jButton1.setEnabled(true);
-                } catch (ClassNotFoundException | SQLException ex) {
-                    JOptionPane.showMessageDialog(this,SYS_ERROR);
-                }
-            
-           }
-        } else {
-            JOptionPane.showMessageDialog(this, ADMIN_ONLY);
-            int dialogResult = JOptionPane.showConfirmDialog(this, LOGIN_AS_ADMIN, "Warning",JOptionPane.YES_NO_OPTION);
-            if(dialogResult == JOptionPane.YES_OPTION){
-                login l = new  login();
-                this.hide();
-                l.setVisible(true);
-            }
-        }
-        
+       
            
     }//GEN-LAST:event_jButton3ActionPerformed
 
