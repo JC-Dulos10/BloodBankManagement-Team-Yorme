@@ -1,0 +1,37 @@
+
+
+Version:	3.12
+CmdLine:	C:\Users\Brian Vergara\Desktop\SOFTWAR ENG 2\FinalVersion\June 10 version\YormeBloodBank_e0.09\YormeBloodBank_e0.09\dist\Blood Bank Management System.exe --l4j-debug
+WOW64:		yes
+Working dir:	C:\Users\Brian Vergara\Desktop\SOFTWAR ENG 2\FinalVersion\June 10 version\YormeBloodBank_e0.09\YormeBloodBank_e0.09\dist\.
+Java min ver:	1.000.000
+Java max ver:	
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8
+Check launcher:	C:\Program Files\Java\jre1.8.0_221\bin\javaw.exe (OK)
+Match:		1.008.000
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_211
+Check launcher:	C:\Program Files\Java\jre1.8.0_211\bin\javaw.exe (OK)
+Match:		1.008.000_211
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_221
+Check launcher:	C:\Program Files\Java\jre1.8.0_221\bin\javaw.exe (OK)
+Match:		1.008.000_221
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8
+Ignore:		1.008.000
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_221
+Ignore:		1.008.000_221
+64-bit search:	SOFTWARE\JavaSoft\JRE...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Check:		SOFTWARE\JavaSoft\JDK\11
+Check launcher:	C:\Program Files\AdoptOpenJDK\jdk-11.0.6.10-hotspot\bin\javaw.exe (OK)
+Match:		1.011.000
+Check:		SOFTWARE\JavaSoft\JDK\11.0.6.10
+Warning:	formatJavaVersion() too many parts added.
+Check launcher:	C:\Program Files\AdoptOpenJDK\jdk-11.0.6.10-hotspot\bin\javaw.exe (OK)
+Match:		1.011.000_006
+Runtime used:	1.011.000_006 (64-bit)
+Launcher:	C:\Program Files\AdoptOpenJDK\jdk-11.0.6.10-hotspot\bin\javaw.exe
+Launcher args:	-jar "C:\Users\Brian Vergara\Desktop\SOFTWAR ENG 2\FinalVersion\June 10 version\YormeBloodBank_e0.09\YormeBloodBank_e0.09\dist\Blood Bank Management System.exe"
+Args length:	160/32768 chars
+Exit code:	0
